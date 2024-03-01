@@ -1,0 +1,26 @@
+**Nume:Eftenie Andrei-Vlad**
+
+## Virtual Memory Allocator
+
+### Descriere:
+
+* Scurtă descriere a funcționalității programului
+
+Programul foloseste 8 functii principale si este implementat cu ajutorul listelor dublu inlantuite circulare.
+Acesta aloca, de fapt, o zona de memorie(arena), in care aloca block-uri de memorie care contin la randul lor mai multe miniblock-uri,  care pot fi scrise, citite si executate.
+
+ALLOC_ARENA -> aloca o zona de memorie pentru arena
+
+DEALLOC_ARENA -> elibereaza toata memoria folosita in program, atat miniblock-urile si block-urile, cat si arena in sine
+
+ALLOC_BLOCK -> aloca o zona de memorie din arena pentru un miniblock, care va fi introdus intr-un block; daca este alocat langa alt miniblock, va fi introdus in block-ul acelui miniblock, dar daca nu este alocat langa alt miniblock, vom aloca si un block individual pentru acesta; daca este introdus intre 2 miniblock-uri diferite, se vor alipi toate si vor fi intr un singur block, cel de-al doilea block fiind eliberat din memorie
+
+FREE_BLOCK -> elibereaza o zona de memorie din arena pentru un miniblock,  care va fi sters dintr-un block; daca este eliberat de langa alt miniblock, va fi eliberat doar miniblock-ul, dar daca nu este eliberat de langa alt miniblock, vom elibera si memoria block-ului individual; daca este eliberat dintre 2 miniblock-uri, cele 2 miniblock-uri se vor separa in 2 liste si celui de al doilea miniblock ii va fi alocat un nou block
+
+READ -> citeste(afiseaza) ce este scris in lista de miniblock-uri a unui block, daca are permisiunea de citire
+
+WRITE -> scrie in lista de miniblockuri a unui block, daca are permisiunea de scriere
+
+PMAP -> afiseaza toata memoria alocata din cadrul arenei
+
+MPROTECT -> schimba permisiunile de citire, scriere si executare ale unui miniblock
